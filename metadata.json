@@ -1,0 +1,7 @@
+{
+  "name": "السنة الهجرية",
+  "description": "ساعة الزمن القمري - تطبيق إسلامي متخصص في عرض التاريخ الهجري والتقويم القمري بطريقة بصرية مبتكرة تحول القمر إلى ساعة زمنية حية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
