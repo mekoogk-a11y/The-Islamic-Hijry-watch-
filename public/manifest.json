@@ -1,8 +1,9 @@
 {
-  "name": "السنة الهجرية | ساعة الزمن القمري",
-  "short_name": "السنة الهجرية",
+  "name": "التاريخ الهجري",
+  "short_name": "الهجري",
   "description": "ساعة هجرية قمرية للهاتف تعرض التاريخ الهجري بدقة وبساطة وأناقة",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#05070c",

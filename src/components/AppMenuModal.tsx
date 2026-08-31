@@ -8,16 +8,16 @@ import {
   Megaphone,
   Settings,
   Info,
-  Sparkles,
   Download,
-  Bell,
-  Clock
+  Clock,
+  CheckCircle2
 } from 'lucide-react';
 
 interface AppMenuModalProps {
   onClose: () => void;
+  onInstallApp: () => void;
+  isInstalled: boolean;
   onOpenWidgets: () => void;
-  onOpenAndroid: () => void;
   onOpenCalendar: () => void;
   onOpenShare: () => void;
   onOpenAppIcon: () => void;
@@ -29,8 +29,9 @@ interface AppMenuModalProps {
 
 export const AppMenuModal: React.FC<AppMenuModalProps> = ({
   onClose,
+  onInstallApp,
+  isInstalled,
   onOpenWidgets,
-  onOpenAndroid,
   onOpenCalendar,
   onOpenShare,
   onOpenAppIcon,
@@ -50,7 +51,7 @@ export const AppMenuModal: React.FC<AppMenuModalProps> = ({
               <Clock className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-amber-400 text-base font-amiri">السنة الهجرية</h3>
+              <h3 className="font-bold text-amber-400 text-base font-amiri">التاريخ الهجري</h3>
               <p className="text-[10px] text-slate-400">ساعة الزمن القمري للهاتف</p>
             </div>
           </div>
@@ -65,6 +66,33 @@ export const AppMenuModal: React.FC<AppMenuModalProps> = ({
         {/* Menu Items List */}
         <div className="space-y-1.5 text-xs font-medium">
           
+          {/* Direct Install Option in Menu (Only if not installed) */}
+          {!isInstalled ? (
+            <button
+              onClick={() => {
+                onClose();
+                onInstallApp();
+              }}
+              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 hover:from-emerald-500/30 hover:to-teal-500/30 border border-emerald-500/40 text-emerald-300 transition-all text-right group"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold">
+                  <Download className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-xs">📲 تثبيت التطبيق على الهاتف</div>
+                  <div className="text-[10px] text-emerald-400/90">إضافة فورية كأيقونة على الشاشة الرئيسية</div>
+                </div>
+              </div>
+              <span className="text-emerald-400 text-xs font-bold">تثبيت</span>
+            </button>
+          ) : (
+            <div className="w-full flex items-center gap-2 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>التطبيق مثبت على هاتفك ويعمل بشكل مستقل</span>
+            </div>
+          )}
+
           {/* Widgets */}
           <button
             onClick={() => {
@@ -83,26 +111,6 @@ export const AppMenuModal: React.FC<AppMenuModalProps> = ({
               </div>
             </div>
             <span className="text-amber-400 text-xs">←</span>
-          </button>
-
-          {/* Android Package */}
-          <button
-            onClick={() => {
-              onClose();
-              onOpenAndroid();
-            }}
-            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 hover:bg-slate-800 border border-slate-800 text-slate-200 transition-all text-right group"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="p-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
-                <Download className="w-4 h-4" />
-              </div>
-              <div>
-                <div className="font-bold text-white">تثبيت وتصدير تطبيق Android</div>
-                <div className="text-[10px] text-slate-400">ملف APK/AAB وPackage ID</div>
-              </div>
-            </div>
-            <span className="text-emerald-400 text-xs">←</span>
           </button>
 
           {/* Full Calendar */}

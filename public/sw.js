@@ -1,15 +1,19 @@
-// Service Worker for "السنة الهجرية" Lunar Clock App - Offline First
-const CACHE_NAME = 'hijri-clock-v1';
-const ASSETS_TO_CACHE = [
+// Service Worker for "التاريخ الهجري" - Offline First
+const CACHE_NAME = 'hijri-app-v2';
+const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/icon.png',
+  '/favicon.ico'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(STATIC_ASSETS).catch(() => {});
     })
   );
   self.skipWaiting();
@@ -31,23 +35,35 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+  
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
+        // Fetch in background to revalidate cache
+        fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, networkResponse);
+            });
+          }
+        }).catch(() => {});
         return cachedResponse;
       }
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
+
+      return fetch(event.request).then((networkResponse) => {
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
         }
-        const responseToCache = response.clone();
+        const responseToCache = networkResponse.clone();
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
-        return response;
+        return networkResponse;
       }).catch(() => {
-        // Return offline fallback if network fails
-        return caches.match('/');
+        if (event.request.mode === 'navigate') {
+          return caches.match('/');
+        }
       });
     })
   );

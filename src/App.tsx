@@ -15,9 +15,10 @@ import { AboutModal } from './components/AboutModal';
 import { SplashScreen } from './components/SplashScreen';
 import { AppIconPreview } from './components/AppIconPreview';
 import { PhoneWidgetModal } from './components/PhoneWidgetModal';
-import { AndroidPackageModal } from './components/AndroidPackageModal';
 import { AppMenuModal } from './components/AppMenuModal';
+import { InstallGuideModal } from './components/InstallGuideModal';
 import { SudanesePromoAudio } from './components/SudanesePromoAudio';
+import { usePwaInstall } from './hooks/usePwaInstall';
 import {
   Menu,
   Moon,
@@ -26,7 +27,9 @@ import {
   Share2,
   Settings,
   Info,
-  Sparkles
+  Sparkles,
+  Download,
+  CheckCircle2
 } from 'lucide-react';
 
 const DEFAULT_SETTINGS: AppSettings = {
@@ -55,10 +58,18 @@ export default function App() {
   // Active Date Offset (in days relative to today)
   const [dayOffset, setDayOffset] = useState(0);
 
+  // PWA Install Hook
+  const {
+    isInstallable,
+    isInstalled,
+    showManualGuide,
+    setShowManualGuide,
+    triggerInstall
+  } = usePwaInstall();
+
   // Modals state
   const [showMenu, setShowMenu] = useState(false);
   const [showWidgets, setShowWidgets] = useState(false);
-  const [showAndroid, setShowAndroid] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -124,7 +135,7 @@ export default function App() {
     if (settings.soundEffects) soundEffects.playChime();
   };
 
-  // Month select handler from clock dial: jumps main view directly to that month
+  // Month select handler from clock dial
   const handleSelectMonth = (monthIndex: number) => {
     setSelectedMonthIndex(monthIndex);
     const todayHijri = getHijriDate(new Date(), settings.hijriAdjustment);
@@ -143,6 +154,16 @@ export default function App() {
     if (settings.soundEffects) soundEffects.playChime();
   };
 
+  // Trigger Install Handler
+  const handleInstallClick = async () => {
+    if (settings.soundEffects) soundEffects.playChime();
+    const result = await triggerInstall();
+    if (result === 'installed') {
+      setNotificationToast('🌙 تم تثبيت تطبيق التاريخ الهجري بنجاح على هاتفك!');
+      setTimeout(() => setNotificationToast(null), 5000);
+    }
+  };
+
   // Notification simulation + Native Web Notification
   const handleTriggerTestNotification = () => {
     const message = `🌙 اليوم ${currentHijri.day} ${currentHijri.monthNameAr} ${currentHijri.year} هـ (${moonPhase.nameAr})`;
@@ -153,16 +174,16 @@ export default function App() {
     if (typeof window !== 'undefined' && 'Notification' in window) {
       if (Notification.permission === 'granted') {
         try {
-          new Notification('السنة الهجرية | ساعة الزمن القمري', {
+          new Notification('التاريخ الهجري | ساعة الزمن القمري', {
             body: `${currentHijri.dayNameAr} ${currentHijri.day} ${currentHijri.monthNameAr} ${currentHijri.year} هـ - ${moonPhase.nameAr}`,
-            icon: '/icon.png',
+            icon: '/icon-192.png',
           });
         } catch {}
       } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
             try {
-              new Notification('السنة الهجرية | ساعة الزمن القمري', {
+              new Notification('التاريخ الهجري | ساعة الزمن القمري', {
                 body: `${currentHijri.dayNameAr} ${currentHijri.day} ${currentHijri.monthNameAr} ${currentHijri.year} هـ`,
               });
             } catch {}
@@ -196,7 +217,7 @@ export default function App() {
 
       {/* Toast Alert */}
       {notificationToast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md p-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold shadow-2xl flex items-center justify-between animate-bounce">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md p-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-2xl flex items-center justify-between animate-bounce">
           <div className="flex items-center gap-2 text-xs sm:text-sm">
             <span className="text-xl">🌙</span>
             <span>{notificationToast}</span>
@@ -214,9 +235,9 @@ export default function App() {
       <div className="relative z-10 max-w-md mx-auto w-full px-3 sm:px-4 py-3 flex flex-col min-h-screen justify-between">
         
         {/* =================================================================== */}
-        {/* TOP MINIMAL BAR: App Title & Subtle Menu Button                      */}
+        {/* TOP BAR: Logo, Title & Direct Install Button                        */}
         {/* =================================================================== */}
-        <header className="w-full flex items-center justify-between pb-2 pt-1 border-b border-slate-800/60">
+        <header className="w-full flex items-center justify-between pb-2 pt-1 border-b border-slate-800/60 gap-2">
           
           {/* Logo & Title */}
           <div className="flex items-center gap-2">
@@ -224,15 +245,29 @@ export default function App() {
               <Moon className="w-4 h-4 fill-amber-400/30 text-amber-400" />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-black font-amiri text-amber-400 leading-tight">
-                السنة الهجرية
+              <h1 className="text-base sm:text-lg font-black font-amiri text-amber-400 leading-tight">
+                التاريخ الهجري
               </h1>
               <p className="text-[10px] text-slate-400 font-medium">ساعة هجرية قمرية</p>
             </div>
           </div>
 
-          {/* Clean Menu & Quick Action Bar */}
+          {/* Actions: Direct Install Button + Menu */}
           <div className="flex items-center gap-1.5">
+            
+            {/* Prominent Direct Install Button (Visible when not installed) */}
+            {isInstallable && (
+              <button
+                id="btn-install-app-top"
+                onClick={handleInstallClick}
+                className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-[11px] sm:text-xs shadow-[0_0_14px_rgba(16,185,129,0.35)] transition-all active:scale-95 cursor-pointer animate-pulse"
+                title="تثبيت التطبيق على الهاتف"
+              >
+                <span>📲</span>
+                <span className="font-cairo whitespace-nowrap">تثبيت التطبيق</span>
+              </button>
+            )}
+
             {/* Phone Widgets Quick Button */}
             <button
               id="btn-nav-widgets"
@@ -241,7 +276,6 @@ export default function App() {
               title="ودجات شاشة الهاتف"
             >
               <Smartphone className="w-4 h-4 text-amber-400" />
-              <span className="text-[11px] font-bold hidden xs:inline">الودجت</span>
             </button>
 
             {/* Menu Drawer Button */}
@@ -260,7 +294,7 @@ export default function App() {
         {/* =================================================================== */}
         {/* MAIN BODY: THE LUNAR CLOCK                                          */}
         {/* =================================================================== */}
-        <main className="w-full flex-1 flex flex-col items-center justify-center my-auto">
+        <main className="w-full flex-1 flex flex-col items-center justify-center my-auto py-1">
           <LunarClock
             currentHijri={currentHijri}
             moonPhase={moonPhase}
@@ -307,12 +341,18 @@ export default function App() {
       {/* MODALS & FEATURES ON DEMAND                                           */}
       {/* ===================================================================== */}
 
+      {/* Fallback Install Guide Modal (when direct prompt unsupported on browser) */}
+      {showManualGuide && (
+        <InstallGuideModal onClose={() => setShowManualGuide(false)} />
+      )}
+
       {/* Main Menu Modal */}
       {showMenu && (
         <AppMenuModal
           onClose={() => setShowMenu(false)}
+          onInstallApp={handleInstallClick}
+          isInstalled={isInstalled}
           onOpenWidgets={() => setShowWidgets(true)}
-          onOpenAndroid={() => setShowAndroid(true)}
           onOpenCalendar={() => setShowCalendar(true)}
           onOpenShare={() => setShowShare(true)}
           onOpenAppIcon={() => setShowAppIcon(true)}
@@ -330,11 +370,6 @@ export default function App() {
           moonPhase={moonPhase}
           onClose={() => setShowWidgets(false)}
         />
-      )}
-
-      {/* Android Package & PWA Specs Modal */}
-      {showAndroid && (
-        <AndroidPackageModal onClose={() => setShowAndroid(false)} />
       )}
 
       {/* Hijri Calendar Modal */}
