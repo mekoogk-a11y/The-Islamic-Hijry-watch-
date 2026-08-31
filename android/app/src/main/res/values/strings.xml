@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">السنة الهجرية</string>
+    <string name="title_activity_main">السنة الهجرية | ساعة الزمن القمري</string>
+    <string name="package_name">com.alhadialnour.alssanahalhijriya</string>
+    <string name="custom_url_scheme">alssanahalhijriya</string>
+    <string name="widget_name">ودجت السنة الهجرية</string>
+    <string name="designer_name">كمال جعفر زكريا</string>
+    <string name="developer_brand">الهدي والنور للتطبيقات والمواقع الإسلامية</string>
+</resources>

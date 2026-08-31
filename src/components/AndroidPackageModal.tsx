@@ -22,10 +22,12 @@ export const AndroidPackageModal: React.FC<AndroidPackageModalProps> = ({ onClos
   const handleInstallPWA = async () => {
     if (installPromptEvent) {
       installPromptEvent.prompt();
-      const choiceResult迷 = await installPromptEvent.userChoice;
-      setInstallPromptEvent(null);
+      const choiceResult = await installPromptEvent.userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        setInstallPromptEvent(null);
+      }
     } else {
-      alert('لتثبيت التطبيق على هاتفك: اضغط على قائمة المتصفح (⋮) ثم اختر "إضافة إلى الشاشة الرئيسية" (Add to Home Screen)');
+      alert('لتثبيت التطبيق على هاتفك فوراً:\nاضغط على قائمة المتصفح (⋮) ثم اختر "إضافة إلى الشاشة الرئيسية" (Add to Home Screen) وسيظهر كأيقونة تطبيق مستقل.');
     }
   };
 
