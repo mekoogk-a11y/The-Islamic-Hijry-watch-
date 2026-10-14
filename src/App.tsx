@@ -30,7 +30,9 @@ import {
   Info,
   Sparkles,
   Download,
-  CheckCircle2
+  CheckCircle2,
+  Megaphone,
+  Mic
 } from 'lucide-react';
 
 const DEFAULT_SETTINGS: AppSettings = {
@@ -269,6 +271,17 @@ export default function App() {
               </button>
             )}
 
+            {/* Sudanese Promo Audio Direct Button */}
+            <button
+              id="btn-nav-promo-audio"
+              onClick={() => setShowPromoAudioModal(true)}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-amber-400/25 to-yellow-500/20 hover:from-amber-500/35 hover:to-yellow-500/35 border border-amber-500/40 text-amber-300 font-bold text-xs transition-all active:scale-95 cursor-pointer shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+              title="استمع إلى الصوت الإعلاني الحماسي بالعامية السودانية"
+            >
+              <Mic className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <span className="font-cairo whitespace-nowrap">صوت إعلاني</span>
+            </button>
+
             {/* Phone Widgets Quick Button */}
             <button
               id="btn-nav-widgets"
@@ -432,7 +445,15 @@ export default function App() {
       )}
 
       {/* About Modal */}
-      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
+      {showAbout && (
+        <AboutModal 
+          onClose={() => setShowAbout(false)} 
+          onOpenPromo={() => {
+            setShowAbout(false);
+            setShowPromoAudioModal(true);
+          }}
+        />
+      )}
 
       {/* App Icon Preview Modal */}
       {showAppIcon && <AppIconPreview onClose={() => setShowAppIcon(false)} />}

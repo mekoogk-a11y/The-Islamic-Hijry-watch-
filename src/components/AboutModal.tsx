@@ -1,12 +1,13 @@
 import React from 'react';
-import { X, Moon, Clock, Phone, Award, ShieldCheck, Heart, Sparkles } from 'lucide-react';
+import { X, Moon, Clock, Phone, Award, ShieldCheck, Heart, Sparkles, Megaphone } from 'lucide-react';
 import { KitabSunnahLogo } from './KitabSunnahLogo';
 
 interface AboutModalProps {
   onClose: () => void;
+  onOpenPromo?: () => void;
 }
 
-export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
+export const AboutModal: React.FC<AboutModalProps> = ({ onClose, onOpenPromo }) => {
   const whatsappNumber = '00249919980435';
   const whatsappUrl = `https://wa.me/249919980435?text=${encodeURIComponent('السلام عليكم ورحمة الله وبركاته، بخصوص تطبيق السنة الهجرية - ساعة الزمن القمري')}`;
 
@@ -87,6 +88,16 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
             <p className="text-xs text-slate-200 leading-relaxed pt-1 border-t border-emerald-500/20">
               إهداء مفعم بالمحبة والتقدير لجهودهم المباركة والرائدة في خدمة كتاب الله العزيز وسنة رسوله المصطفى ﷺ والأعمال الخيرية والإنسانية في شتى بقاع السودان.
             </p>
+
+            {onOpenPromo && (
+              <button
+                onClick={onOpenPromo}
+                className="w-full mt-2 py-2 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 via-amber-400/25 to-yellow-500/20 hover:from-amber-500/35 hover:to-yellow-500/35 border border-amber-500/40 text-amber-300 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-95"
+              >
+                <Megaphone className="w-4 h-4 text-amber-400 animate-pulse" />
+                <span>استمع إلى الإعلان الصوتي الحماسي (صوت رجل بالعامية السودانية) 🎙️</span>
+              </button>
+            )}
           </div>
 
           {/* Official Signature Section */}
