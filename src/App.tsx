@@ -291,6 +291,23 @@ export default function App() {
 
         </header>
 
+        {/* Sponsorship & Dedication Ribbon Bar */}
+        <div 
+          onClick={() => setShowAbout(true)}
+          className="w-full mt-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-500/10 via-slate-900/80 to-emerald-500/10 border border-slate-800/80 flex items-center justify-between text-[10px] sm:text-[11px] text-slate-300 cursor-pointer hover:border-amber-500/30 transition-colors shadow-sm"
+          title="انقر لعرض تفاصيل الرعاية والإهداء"
+        >
+          <div className="flex items-center gap-1.5 truncate">
+            <span className="text-amber-400 font-bold">🌟 برعاية:</span>
+            <span className="text-white font-medium">منظمة الهدية</span>
+          </div>
+          <span className="text-slate-600">|</span>
+          <div className="flex items-center gap-1.5 truncate">
+            <span className="text-emerald-400 font-bold">📜 إهداء إلى:</span>
+            <span className="text-emerald-200/90 font-medium truncate">جمعية الكتاب والسنة الخيرية بالسودان</span>
+          </div>
+        </div>
+
         {/* =================================================================== */}
         {/* MAIN BODY: THE LUNAR CLOCK                                          */}
         {/* =================================================================== */}
@@ -314,8 +331,19 @@ export default function App() {
         {/* =================================================================== */}
         {/* FOOTER & OFFICIAL DESIGNER SIGNATURE                                */}
         {/* =================================================================== */}
-        <footer className="w-full mt-2 pt-2 border-t border-slate-800/60 text-center space-y-1 text-xs text-slate-400">
+        <footer className="w-full mt-2 pt-2 border-t border-slate-800/60 text-center space-y-1.5 text-xs text-slate-400">
           
+          {/* Sponsorship & Dedication Lines */}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]">
+            <span className="text-amber-300 font-medium">
+              برعاية: <strong className="text-white">منظمة الهدية</strong>
+            </span>
+            <span className="text-slate-600 hidden sm:inline">•</span>
+            <span className="text-emerald-300 font-medium">
+              إهداء إلى: <strong className="text-white">جمعية الكتاب والسنة الخيرية بالسودان</strong>
+            </span>
+          </div>
+
           <div className="flex items-center justify-center gap-2 text-slate-300 text-[11px]">
             <span>تصميم: <strong className="text-white font-medium">كمال جعفر زكريا</strong></span>
             <span>•</span>

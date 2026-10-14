@@ -59,10 +59,42 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
             </ul>
           </div>
 
+          {/* Sponsorship & Dedication Section */}
+          <div className="space-y-2.5">
+            {/* Sponsorship Banner */}
+            <div className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-amber-900/30 border border-amber-500/40 shadow-md">
+              <div className="flex items-center gap-2 text-amber-300 font-bold text-xs mb-1">
+                <Award className="w-4 h-4 text-amber-400" />
+                <span>الرعاية الكريمة</span>
+              </div>
+              <div className="text-sm font-bold text-white flex items-center gap-1.5 font-cairo">
+                <span>برعاية:</span>
+                <span className="text-amber-300 font-extrabold text-base">منظمة الهدية</span>
+              </div>
+              <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                تم تطوير هذا التطبيق برعاية كريمة من منظمة الهدية، دعمًا لخدمة التقويم الهجري القمري والمحتوى الإسلامي النافع.
+              </p>
+            </div>
+
+            {/* Dedication Banner */}
+            <div className="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-teal-950/30 border border-emerald-500/40 shadow-md">
+              <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs mb-1">
+                <Heart className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
+                <span>إهداء خاص</span>
+              </div>
+              <div className="text-sm font-bold text-white font-cairo">
+                إهداء إلى: <span className="text-emerald-300 font-extrabold text-base">جمعية الكتاب والسنة الخيرية بالسودان</span>
+              </div>
+              <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                إهداء مفعم بالمحبة والتقدير لجهودهم المباركة في خدمة كتاب الله وسنة رسوله ﷺ والعمل الخيري والإنساني في ربوع السودان الحبيب.
+              </p>
+            </div>
+          </div>
+
           {/* Official Signature Section */}
           <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/30 border-2 border-amber-500/40 text-center space-y-2.5">
             <div className="text-amber-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <Award className="w-4 h-4 text-amber-400" />
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
               <span>بيانات التصميم والتطوير</span>
             </div>
 

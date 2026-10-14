@@ -17,11 +17,14 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
 
   const shareText = `🌙 *تطبيق السنة الهجرية | ساعة الزمن القمري* 🌙
+🌟 برعاية: *منظمة الهدية*
+📜 إهداء إلى: *جمعية الكتاب والسنة الخيرية بالسودان*
 🗓️ اليوم: ${currentHijri.dayNameAr} ${currentHijri.day} ${currentHijri.monthNameAr} ${currentHijri.year} هـ
 📅 الموافق: ${currentHijri.gregorianFormattedAr}
 🌕 مرحلة القمر: ${moonPhase.nameAr} ${moonPhase.symbol} (${moonPhase.illumination}%)
 ${currentHijri.islamicEvent ? `⭐ مناسبة اليوم: ${currentHijri.islamicEvent}\n` : ''}${currentHijri.isSacredMonth ? `✨ من الأشهر الحرم (${currentHijri.monthNameAr})\n` : ''}
-📲 شارك الزمن القمري مع أحبابك!`;
+📲 تطبيق السنة الهجرية - تصميم: كمال جعفر زكريا (واتساب: 00249919980435)
+مع تحيات الهدي والنور للتطبيقات والمواقع الإسلامية`;
 
   const handleCopyText = async () => {
     try {
@@ -185,11 +188,11 @@ ${currentHijri.islamicEvent ? `⭐ مناسبة اليوم: ${currentHijri.islam
 
       // Footer Credits
       ctx.fillStyle = '#f59e0b';
-      ctx.font = '22px sans-serif';
-      ctx.fillText('مع تحيات الهدي والنور للتطبيقات والمواقع الإسلامية', 540, 915);
+      ctx.font = 'bold 22px sans-serif';
+      ctx.fillText('🌟 برعاية: منظمة الهدية  •  📜 إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان', 540, 910);
       ctx.fillStyle = '#94a3b8';
       ctx.font = '20px sans-serif';
-      ctx.fillText('تصميم: كمال جعفر زكريا  |  واتساب: 00249919980435', 540, 955);
+      ctx.fillText('تصميم: كمال جعفر زكريا  |  واتساب: 00249919980435', 540, 950);
 
       // Download
       const link = document.createElement('a');
@@ -265,10 +268,16 @@ ${currentHijri.islamicEvent ? `⭐ مناسبة اليوم: ${currentHijri.islam
             </div>
           )}
 
-          {/* Card Footer Signature */}
-          <div className="pt-3 border-t border-slate-800/80 text-[10px] text-slate-500 flex items-center justify-between">
-            <span>الهدي والنور للتطبيقات الإسلامية</span>
-            <span>تصميم: كمال جعفر زكريا</span>
+          {/* Card Footer Signature & Sponsorship */}
+          <div className="pt-3 border-t border-slate-800/80 text-[10px] space-y-1.5 text-right">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-1 text-[11px]">
+              <span className="text-amber-300 font-bold">🌟 برعاية: منظمة الهدية</span>
+              <span className="text-emerald-300 font-bold">📜 إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان</span>
+            </div>
+            <div className="flex items-center justify-between text-slate-400 text-[10px] pt-1 border-t border-slate-800/40">
+              <span>الهدي والنور للتطبيقات الإسلامية</span>
+              <span>تصميم: كمال جعفر زكريا</span>
+            </div>
           </div>
         </div>
 
