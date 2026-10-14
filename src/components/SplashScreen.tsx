@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
+import { KitabSunnahLogo } from './KitabSunnahLogo';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -77,22 +78,16 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           <Sparkles className="w-3.5 h-3.5 text-amber-400" />
         </motion.p>
 
-        {/* Step 4: Sponsorship & Dedication Badges */}
+        {/* Step 4: Dedication Badge with Official Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="space-y-1.5 w-full"
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="w-full flex justify-center"
         >
-          {/* Sponsorship */}
-          <div className="py-1 px-3 rounded-full bg-amber-500/15 border border-amber-500/35 text-amber-300 text-[11px] font-bold flex items-center justify-center gap-1.5 shadow-sm">
-            <span>🌟</span>
-            <span>برعاية: منظمة الهدية</span>
-          </div>
-
-          {/* Dedication */}
-          <div className="py-1 px-3 rounded-full bg-emerald-500/15 border border-emerald-500/35 text-emerald-300 text-[11px] font-semibold flex items-center justify-center gap-1.5 shadow-sm">
-            <span>📜</span>
+          {/* Dedication Badge */}
+          <div className="py-1.5 px-3.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-200 text-xs font-bold flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm">
+            <KitabSunnahLogo size={24} />
             <span>إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان</span>
           </div>
         </motion.div>

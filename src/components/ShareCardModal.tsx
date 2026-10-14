@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { HijriDateInfo, MoonPhaseInfo } from '../types';
 import { X, Share2, Copy, Check, MessageSquare, Download, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { KitabSunnahLogo } from './KitabSunnahLogo';
 
 interface ShareCardModalProps {
   currentHijri: HijriDateInfo;
@@ -17,7 +18,6 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
 
   const shareText = `🌙 *تطبيق السنة الهجرية | ساعة الزمن القمري* 🌙
-🌟 برعاية: *منظمة الهدية*
 📜 إهداء إلى: *جمعية الكتاب والسنة الخيرية بالسودان*
 🗓️ اليوم: ${currentHijri.dayNameAr} ${currentHijri.day} ${currentHijri.monthNameAr} ${currentHijri.year} هـ
 📅 الموافق: ${currentHijri.gregorianFormattedAr}
@@ -187,9 +187,9 @@ ${currentHijri.islamicEvent ? `⭐ مناسبة اليوم: ${currentHijri.islam
       ctx.stroke();
 
       // Footer Credits
-      ctx.fillStyle = '#f59e0b';
-      ctx.font = 'bold 22px sans-serif';
-      ctx.fillText('🌟 برعاية: منظمة الهدية  •  📜 إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان', 540, 910);
+      ctx.fillStyle = '#34d399';
+      ctx.font = 'bold 24px sans-serif';
+      ctx.fillText('📜 إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان', 540, 910);
       ctx.fillStyle = '#94a3b8';
       ctx.font = '20px sans-serif';
       ctx.fillText('تصميم: كمال جعفر زكريا  |  واتساب: 00249919980435', 540, 950);
@@ -268,11 +268,11 @@ ${currentHijri.islamicEvent ? `⭐ مناسبة اليوم: ${currentHijri.islam
             </div>
           )}
 
-          {/* Card Footer Signature & Sponsorship */}
-          <div className="pt-3 border-t border-slate-800/80 text-[10px] space-y-1.5 text-right">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-1 text-[11px]">
-              <span className="text-amber-300 font-bold">🌟 برعاية: منظمة الهدية</span>
-              <span className="text-emerald-300 font-bold">📜 إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان</span>
+          {/* Card Footer Signature & Dedication with Logo */}
+          <div className="pt-3 border-t border-slate-800/80 text-[10px] space-y-2 text-right">
+            <div className="flex items-center justify-center gap-2 p-1.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 font-bold text-xs">
+              <KitabSunnahLogo size={24} />
+              <span>إهداء إلى: جمعية الكتاب والسنة الخيرية بالسودان</span>
             </div>
             <div className="flex items-center justify-between text-slate-400 text-[10px] pt-1 border-t border-slate-800/40">
               <span>الهدي والنور للتطبيقات الإسلامية</span>

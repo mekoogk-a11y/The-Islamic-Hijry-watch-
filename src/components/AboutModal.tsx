@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Moon, Clock, Phone, Award, ShieldCheck, Heart, Sparkles } from 'lucide-react';
+import { KitabSunnahLogo } from './KitabSunnahLogo';
 
 interface AboutModalProps {
   onClose: () => void;
@@ -59,36 +60,33 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
             </ul>
           </div>
 
-          {/* Sponsorship & Dedication Section */}
-          <div className="space-y-2.5">
-            {/* Sponsorship Banner */}
-            <div className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-amber-900/30 border border-amber-500/40 shadow-md">
-              <div className="flex items-center gap-2 text-amber-300 font-bold text-xs mb-1">
-                <Award className="w-4 h-4 text-amber-400" />
-                <span>الرعاية الكريمة</span>
+          {/* Dedication Section with Official Association Emblem */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-teal-950/50 border-2 border-emerald-500/50 shadow-xl space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs">
+                <Heart className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
+                <span>إهداء خاص ومبارك</span>
               </div>
-              <div className="text-sm font-bold text-white flex items-center gap-1.5 font-cairo">
-                <span>برعاية:</span>
-                <span className="text-amber-300 font-extrabold text-base">منظمة الهدية</span>
-              </div>
-              <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                تم تطوير هذا التطبيق برعاية كريمة من منظمة الهدية، دعمًا لخدمة التقويم الهجري القمري والمحتوى الإسلامي النافع.
-              </p>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">
+                السودان 🇸🇩
+              </span>
             </div>
 
-            {/* Dedication Banner */}
-            <div className="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-teal-950/30 border border-emerald-500/40 shadow-md">
-              <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs mb-1">
-                <Heart className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
-                <span>إهداء خاص</span>
+            <div className="flex items-center gap-3.5 pt-1">
+              {/* Official Logo of the Association */}
+              <KitabSunnahLogo size={58} />
+              
+              <div className="flex-1 min-w-0">
+                <div className="text-xs text-slate-300 font-medium">إهداء إلى:</div>
+                <div className="text-base sm:text-lg font-black text-emerald-300 font-cairo leading-snug drop-shadow-sm">
+                  جمعية الكتاب والسنة الخيرية بالسودان
+                </div>
               </div>
-              <div className="text-sm font-bold text-white font-cairo">
-                إهداء إلى: <span className="text-emerald-300 font-extrabold text-base">جمعية الكتاب والسنة الخيرية بالسودان</span>
-              </div>
-              <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                إهداء مفعم بالمحبة والتقدير لجهودهم المباركة في خدمة كتاب الله وسنة رسوله ﷺ والعمل الخيري والإنساني في ربوع السودان الحبيب.
-              </p>
             </div>
+
+            <p className="text-xs text-slate-200 leading-relaxed pt-1 border-t border-emerald-500/20">
+              إهداء مفعم بالمحبة والتقدير لجهودهم المباركة والرائدة في خدمة كتاب الله العزيز وسنة رسوله المصطفى ﷺ والأعمال الخيرية والإنسانية في شتى بقاع السودان.
+            </p>
           </div>
 
           {/* Official Signature Section */}

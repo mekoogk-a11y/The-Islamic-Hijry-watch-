@@ -18,6 +18,7 @@ import { PhoneWidgetModal } from './components/PhoneWidgetModal';
 import { AppMenuModal } from './components/AppMenuModal';
 import { InstallGuideModal } from './components/InstallGuideModal';
 import { SudanesePromoAudio } from './components/SudanesePromoAudio';
+import { KitabSunnahLogo } from './components/KitabSunnahLogo';
 import { usePwaInstall } from './hooks/usePwaInstall';
 import {
   Menu,
@@ -291,21 +292,18 @@ export default function App() {
 
         </header>
 
-        {/* Sponsorship & Dedication Ribbon Bar */}
+        {/* Dedication Ribbon Bar with Official Logo */}
         <div 
           onClick={() => setShowAbout(true)}
-          className="w-full mt-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-500/10 via-slate-900/80 to-emerald-500/10 border border-slate-800/80 flex items-center justify-between text-[10px] sm:text-[11px] text-slate-300 cursor-pointer hover:border-amber-500/30 transition-colors shadow-sm"
-          title="انقر لعرض تفاصيل الرعاية والإهداء"
+          className="w-full mt-1 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950/40 via-slate-900/90 to-emerald-950/40 border border-emerald-500/35 flex items-center justify-between text-[11px] sm:text-xs text-slate-200 cursor-pointer hover:border-emerald-500/50 transition-colors shadow-sm"
+          title="انقر لعرض تفاصيل الإهداء والشعار المبارك"
         >
-          <div className="flex items-center gap-1.5 truncate">
-            <span className="text-amber-400 font-bold">🌟 برعاية:</span>
-            <span className="text-white font-medium">منظمة الهدية</span>
-          </div>
-          <span className="text-slate-600">|</span>
-          <div className="flex items-center gap-1.5 truncate">
+          <div className="flex items-center gap-2 truncate">
+            <KitabSunnahLogo size={22} />
             <span className="text-emerald-400 font-bold">📜 إهداء إلى:</span>
-            <span className="text-emerald-200/90 font-medium truncate">جمعية الكتاب والسنة الخيرية بالسودان</span>
+            <span className="text-emerald-100 font-bold truncate">جمعية الكتاب والسنة الخيرية بالسودان</span>
           </div>
+          <span className="text-emerald-400/80 text-[10px] font-bold shrink-0">تفاصيل ←</span>
         </div>
 
         {/* =================================================================== */}
@@ -333,13 +331,10 @@ export default function App() {
         {/* =================================================================== */}
         <footer className="w-full mt-2 pt-2 border-t border-slate-800/60 text-center space-y-1.5 text-xs text-slate-400">
           
-          {/* Sponsorship & Dedication Lines */}
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]">
-            <span className="text-amber-300 font-medium">
-              برعاية: <strong className="text-white">منظمة الهدية</strong>
-            </span>
-            <span className="text-slate-600 hidden sm:inline">•</span>
-            <span className="text-emerald-300 font-medium">
+          {/* Dedication Line with Logo */}
+          <div className="flex items-center justify-center gap-2 text-[11px] text-emerald-300 font-medium">
+            <KitabSunnahLogo size={20} />
+            <span>
               إهداء إلى: <strong className="text-white">جمعية الكتاب والسنة الخيرية بالسودان</strong>
             </span>
           </div>

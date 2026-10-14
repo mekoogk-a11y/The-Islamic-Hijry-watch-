@@ -12,6 +12,7 @@ import {
   Clock,
   CheckCircle2
 } from 'lucide-react';
+import { KitabSunnahLogo } from './KitabSunnahLogo';
 
 interface AppMenuModalProps {
   onClose: () => void;
@@ -213,24 +214,22 @@ export const AppMenuModal: React.FC<AppMenuModalProps> = ({
             <span className="text-slate-400 text-xs">←</span>
           </button>
 
-          {/* Sponsorship & Dedication Quick Card */}
+          {/* Dedication & Logo Quick Card */}
           <button
             onClick={() => {
               onClose();
               onOpenAbout();
             }}
-            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-emerald-500/10 hover:from-amber-500/20 hover:to-emerald-500/20 border border-amber-500/30 text-slate-200 transition-all text-right group"
+            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-teal-950/40 hover:from-emerald-950/70 hover:to-teal-950/60 border border-emerald-500/40 text-slate-200 transition-all text-right group shadow-md"
           >
             <div className="flex items-center gap-2.5">
-              <div className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
-                <span className="text-base leading-none">📜</span>
-              </div>
+              <KitabSunnahLogo size={32} />
               <div>
-                <div className="font-bold text-amber-300">الرعاية الكريمة والإهداء</div>
-                <div className="text-[10px] text-slate-300">منظمة الهدية • جمعية الكتاب والسنة بالسودان</div>
+                <div className="font-bold text-emerald-300 text-xs sm:text-sm">إهداء التطبيق المبارك والشعار</div>
+                <div className="text-[10px] text-slate-300">جمعية الكتاب والسنة الخيرية بالسودان 🇸🇩</div>
               </div>
             </div>
-            <span className="text-amber-400 text-xs font-bold">عرض ←</span>
+            <span className="text-emerald-400 text-xs font-bold">عرض ←</span>
           </button>
 
           {/* About */}
